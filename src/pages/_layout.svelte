@@ -6,6 +6,7 @@
   import Navbar from "@/components/Navbar.svelte";
   import { services } from "@/api";
   import Icon from "@/components/Icon.svelte";
+  import Onboarding from "@/components/Onboarding/Onboarding.svelte";
   import { authStore } from "@/stores/auth.store";
 
   const userReq = services.auth.user();
@@ -16,6 +17,10 @@
     .catch(() => {
       services.auth.resetToken();
     });
+
+  function handleOnboardingEnd() {
+    authStore.update((user) => ({ ...user, needOnboarding: false }));
+  }
 </script>
 
 <main>
@@ -27,8 +32,13 @@
       </Icon>
     </div>
   {:then}
-    <slot />
-    <Navbar />
+    <!-- {#if true} -->
+      {#if $authStore && $authStore.needOnboarding}
+      <Onboarding on:onboardingEnd={handleOnboardingEnd} />
+    {:else}
+      <slot />
+      <Navbar />
+    {/if}
   {:catch}
     {$goto("/auth/login")}
   {/await}

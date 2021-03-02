@@ -14,4 +14,8 @@
 </div>
 
 <style lang="scss">
+  .icon {
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
 </style>
