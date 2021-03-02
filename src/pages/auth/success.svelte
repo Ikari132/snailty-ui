@@ -11,7 +11,6 @@
   const userReq = services.auth.user();
   userReq
     .then(({ data: user }) => {
-      console.log("get user success", user);
       authStore.set(user);
       $goto("/");
     })
@@ -19,14 +18,3 @@
       console.log("auth error", res);
     });
 </script>
-
-<!-- <div class="wrapper">
-  <div class="content">
-    <div class="title py-4">
-      <a href="api/auth/logout">
-        <Button>Logout</Button>
-        {token}
-      </a>
-    </div>
-  </div>
-</div> -->

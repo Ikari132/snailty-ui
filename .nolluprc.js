@@ -9,7 +9,7 @@ module.exports = {
   verbose: true,
   proxy: {
     '/api': {
-      host: "http://localhost:5000",
+      host: process.env.API_URL,
       changeOrigin: true,
       proxyReqPathResolver: function (req) {
         return req.url.replace("api/", "")

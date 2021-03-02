@@ -36,7 +36,6 @@ const getTsConfigAliases = (config) => {
 
             return alias;
         }, [])
-    console.log("aliases", aliases)
     return aliases;
 }
 

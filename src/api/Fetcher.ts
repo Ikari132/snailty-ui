@@ -28,6 +28,7 @@ export class Fetcher {
     }
 
     saveToken(token: string) {
+        console.log("fetcher:update token", token)
         localStorage.setItem("jwtToken", token);
         this.token = token;
     }
