@@ -11,7 +11,8 @@ export interface ITea {
     price: string;
     tags: string[];
     inStock: boolean;
-    count?: number;
+    brewCount?: number;
+    amount?: number;
     rating?: number;
     tasteProfile?: ITasteProfile[];
 }

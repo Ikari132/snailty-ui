@@ -18,6 +18,9 @@
 
     --card-background: #fff;
 
+    --border-radius-default: 4px;
+    --border-radius-lg: 4px;
+
     @media (prefers-color-scheme: dark) {
         --main-background-from: #424a89;
         --main-background-to: #ec7e67;
@@ -71,7 +74,7 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     padding: 0.4em;
-    margin: 0 0 0.5em 0;
+    margin: 0;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 2px;

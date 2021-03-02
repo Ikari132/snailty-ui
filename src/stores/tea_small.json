@@ -12,7 +12,9 @@
                 ],
                 "rating": 5,
                 "description": "",
-                "price": "",
+                "price": 10,
+                "amount": 50,
+                "brewCount": 2,
                 "tags": "",
                 "inStock": true,
                 "tasteProfile": [

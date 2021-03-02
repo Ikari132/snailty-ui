@@ -1,12 +1,18 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import FaLeaf from "svelte-icons/fa/FaLeaf.svelte";
+  import FaWeightHanging from "svelte-icons/fa/FaWeightHanging.svelte";
+  import GiBerriesBowl from "svelte-icons/gi/GiBerriesBowl.svelte";
+  import FaDollarSign from "svelte-icons/fa/FaDollarSign.svelte";
+  import FaStar from "svelte-icons/fa/FaStar.svelte";
+  import GiWaterDrop from "svelte-icons/gi/GiWaterDrop.svelte";
   import type { ITea } from "./../pages/types";
   import { CATEGORIES_COLOR } from "./../pages/constants";
   import Button from "./../components/Button.svelte";
   import RatingNumber from "./RatingNumber.svelte";
   import BrewsCount from "./BrewsCount.svelte";
   import Icon from "./Icon.svelte";
+  import Badge from "./Badge.svelte";
 
   export let tea: ITea;
   const dispatch = createEventDispatcher();
@@ -19,31 +25,46 @@
 <div
   class="tea-card flex flex-col items-start justify-start rounded-xl shadow p-4 {$$props.class}"
 >
-  <div class="flex justify-end w-full">
+  <!-- <div class="flex justify-end w-full">
     <Icon color={CATEGORIES_COLOR[tea.type.toUpperCase()]}>
       <FaLeaf />
     </Icon>
-  </div>
-  <h2 class="text-lg font-bold flex justify-between w-full pb-4">
+  </div> -->
+  <h2 class="text-2xl font-bold flex justify-between w-full pb-2">
     {tea.name}
   </h2>
   {#if tea.rating}
     <div class="flex justify-center items-center w-full">
-      <RatingNumber rating={tea.rating} />
-      <BrewsCount />
+      <!-- <RatingNumber rating={tea.rating} /> -->
+      <Badge icon={FaStar} background="transparent">{tea.rating}</Badge>
+      <Badge icon={GiBerriesBowl} background="transparent"
+        >{tea.brewCount}</Badge
+      >
+      <Badge icon={FaWeightHanging} background="transparent">{tea.amount}</Badge
+      >
+      <Badge icon={FaDollarSign} background="transparent"
+        >{tea.price}$/50g</Badge
+      >
     </div>
+    <div class="py-2">
+      <Badge icon={FaLeaf} iconColor={CATEGORIES_COLOR[tea.type.toUpperCase()]}>
+        {tea.type}
+      </Badge>
+    </div>
+
     {#if tea.tasteProfile}
-      <div class="flex items-center justify-center w-full py-6">
+      <div class="flex items-center justify-start w-full py-2">
         {#each tea.tasteProfile as tasteProfile}
-          <div class="flex flex-col items-center justify-center px-2">
-            <Icon>
-              <FaLeaf />
-            </Icon>
+          <Badge
+            icon={GiWaterDrop}
+            iconColor={CATEGORIES_COLOR[tea.type.toUpperCase()]}
+            background="transparent"
+          >
             {tasteProfile.type}
-          </div>
+          </Badge>
         {/each}
       </div>
-      <Button on:click={clickHandler} fullWidth>Brew</Button>
+      <Button class="mt-4" on:click={clickHandler} fullWidth>Brew</Button>
     {/if}
   {:else}
     <Button on:click={clickHandler} fullWidth>Brew and rate</Button>
@@ -56,7 +77,7 @@
     min-width: 200px;
 
     // height: 300px;
-    width: 200px;
+    width: 300px;
 
     background: var(--card-background);
     color: var(--font-color);
