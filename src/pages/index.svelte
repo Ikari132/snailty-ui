@@ -25,23 +25,52 @@
 <div class="wrapper day">
   <div class="sun" />
   <div class="content">
-    <div class="flex items-center justify-center w-full px-16 py-4">
-      <h2
-        class="title text-lg text-center font-bold flex items-center justify-center w-32"
-      >
-        Perfect for this time, lets brew it
-      </h2>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="flex items-center justify-center w-full px-16 py-4">
+            <h2 class="title">Perfect for this time, lets brew it</h2>
+          </div>
+          <div class="brew-now">
+            {#if gallery.length}
+              <TeaGroup teaGroup={gallery[0]} on:select={handleTeaSelect} />
+            {/if}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2
+            class="title text-lg font-bold flex items-center justify-center py-4"
+          >
+            Quick actions
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <a href="/brew/type">
+            <Card class="quick-action-card items-center justify-start w-full">
+              <Icon width={80} height={80}>
+                <FaRegClock />
+              </Icon>
+              <h2 class="text-lg font-bold">Timer</h2>
+            </Card>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/add">
+            <Card class="quick-action-card items-center justify-start w-full">
+              <Icon width={80} height={80}>
+                <FaPlus />
+              </Icon>
+              <h2 class="text-lg font-bold">Add new tea</h2>
+            </Card>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="brew-now">
-      {#if gallery.length}
-        <TeaGroup teaGroup={gallery[0]} on:select={handleTeaSelect} />
-      {/if}
-    </div>
-
-    <h2 class="title text-lg font-bold flex items-center justify-center py-4">
-      Quick actions
-    </h2>
-    <div class="grid grid-col-2 gap-4 grid-flow-col w-full px-4">
+    <!-- <div class="grid grid-col-2 gap-4 grid-flow-col w-full px-4">
       <div class="w-full">
         <a href="/brew/type">
           <Card class="quick-action-card items-center justify-start w-full">
@@ -62,7 +91,7 @@
           </Card>
         </a>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 

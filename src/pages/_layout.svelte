@@ -33,7 +33,7 @@
     </div>
   {:then}
     <!-- {#if true} -->
-      {#if $authStore && $authStore.needOnboarding}
+    {#if $authStore && $authStore.needOnboarding}
       <Onboarding on:onboardingEnd={handleOnboardingEnd} />
     {:else}
       <slot />
@@ -47,9 +47,10 @@
 <style lang="scss">
   main {
     position: relative;
-    max-width: 56em;
+    width: 100%;
     min-height: 100%;
     height: 100%;
+    max-height: 100%;
     overflow: auto;
 
     background-color: white;

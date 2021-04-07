@@ -70,6 +70,7 @@
    "dependencies": {
       "svelte-i18n": "^3.3.5",
       "svelte-icons": "^2.1.0",
+      "sveltestrap": "^3.13.0",
       "tailwindcss": "^2.0.3"
    }
 }

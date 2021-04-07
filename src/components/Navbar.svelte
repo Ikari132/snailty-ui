@@ -4,7 +4,12 @@
   import FaRegUser from "svelte-icons/fa/FaRegUser.svelte";
   import FaHistory from "svelte-icons/fa/FaHistory.svelte";
   import FaRegListAlt from "svelte-icons/fa/FaRegListAlt.svelte";
+  import { getDeviceType } from "./helpers";
 
+  const isIphone = getDeviceType() === "IPhone";
+  if (isIphone) {
+    document.documentElement.style.setProperty("--navbar-height", 80 + "px");
+  }
   const routes = [
     {
       icon: FaHome,
@@ -34,13 +39,14 @@
   ];
 </script>
 
-<nav class="main-toolbar glass-25">
+<nav class="main-toolbar glass-25" class:main-toolbar__iphone={isIphone}>
   {#each routes as route}
     <div class="main-toolbar__button">
       <a
         href={route.path}
         rel="prefetch"
-        class="flex flex-col items-center justify-center">
+        class="flex flex-col items-center justify-center"
+      >
         <div class="icon">
           <svelte:component this={route.icon} />
         </div>
@@ -55,20 +61,25 @@
 <style lang="scss">
   .main-toolbar {
     width: 100%;
-    height: 60px;
+    height: var(--navbar-height);
     position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background: var(--card-background);
     border-radius: 20px 20px 0 0;
 
     padding: 0 20px;
     z-index: 9999;
-    color:var(--font-color);
-
+    color: var(--font-color);
+    &__iphone {
+      .main-toolbar__button {
+        align-items: flex-start;
+        padding-top: 15px;
+      }
+    }
     &__button {
       display: flex;
       justify-content: center;
