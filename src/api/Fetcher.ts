@@ -1,10 +1,11 @@
+declare const process: any;
 export class Fetcher {
     token: string;
     apiUrl: string;
     constructor() {
         console.log("fetcher", this.getToken())
         this.token = this.getToken();
-        this.apiUrl = (process as any).env.API_URL;
+        this.apiUrl = process.env.API_URL;
     }
 
     async fetch<I>(url: string, options: RequestInit = {}): Promise<{ data: I, res: Response }> {

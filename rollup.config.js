@@ -105,7 +105,9 @@ export default {
         {
             // provide node environment on the client
             transform: code => ({
-                code: code.replace('process.env.NODE_ENV', `"${process.env.NODE_ENV}"`),
+                code: code
+                    .replace('process.env.NODE_ENV', `"${process.env.NODE_ENV}"`)
+                    .replace('process.env.API_URL', `"${process.env.API_URL}"`),
                 map: { mappings: '' }
             })
         },
