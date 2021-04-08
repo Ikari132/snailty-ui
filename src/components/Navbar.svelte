@@ -40,7 +40,8 @@
       <a
         href={route.path}
         rel="prefetch"
-        class="flex flex-col items-center justify-center">
+        class="flex flex-col items-center justify-center"
+      >
         <div class="icon">
           <svelte:component this={route.icon} />
         </div>
@@ -56,6 +57,7 @@
   .main-toolbar {
     width: 100%;
     height: 60px;
+    max-height: 60px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -65,9 +67,8 @@
     background: var(--card-background);
     border-radius: 20px 20px 0 0;
 
-    padding: 0 20px;
     z-index: 9999;
-    color:var(--font-color);
+    color: var(--font-color);
 
     &__button {
       display: flex;
