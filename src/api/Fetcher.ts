@@ -1,13 +1,17 @@
+declare const process: any;
 export class Fetcher {
     token: string;
+    apiUrl: string;
     constructor() {
         console.log("fetcher", this.getToken())
         this.token = this.getToken();
+        this.apiUrl = process.env.API_URL;
     }
 
     async fetch<I>(url: string, options: RequestInit = {}): Promise<{ data: I, res: Response }> {
         console.log("fetcher token", this.token)
         console.log(this)
+
         if (this.token) {
             options.headers = {
                 ...options.headers,
@@ -16,7 +20,7 @@ export class Fetcher {
         }
 
         return new Promise(async (done, rej) => {
-            const res = await fetch(url, options);
+            const res = await fetch(url.replace("/api/", `${this.apiUrl}/`), options);
 
             if (res.ok) {
                 const data: I = await res.json();

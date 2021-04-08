@@ -62,6 +62,7 @@
   .main-toolbar {
     width: 100%;
     height: var(--navbar-height);
+    max-height: 60px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -71,7 +72,6 @@
     background: var(--card-background);
     border-radius: 20px 20px 0 0;
 
-    padding: 0 20px;
     z-index: 9999;
     color: var(--font-color);
     &__iphone {

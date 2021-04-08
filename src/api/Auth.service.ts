@@ -3,7 +3,7 @@ import { Base } from "./Base.service";
 
 export class Auth extends Base {
     google() {
-        window.location.href = '/api/auth/google';
+        window.location.href = `${this.fetcher.apiUrl}/auth/google`;
     }
     user() {
         return this.fetcher.fetch<IUser>('/api/auth/user');
