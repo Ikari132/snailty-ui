@@ -9,6 +9,7 @@
   {disabled}
   class:w-full={fullWidth}
   {type}
+  on:click
 >
   <slot />
 </button>
