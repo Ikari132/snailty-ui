@@ -24,12 +24,12 @@
     <div class="title py-4 text-2xl">Tea gallery</div>
   </div>
 
-  <Button on:click={googleLoginHandler} class="button--google">
+  <button on:click={googleLoginHandler} class="button--google btn btn-primary">
     <Icon width={40} height={40} color="#009245">
       <GoogleIcon />
     </Icon>
     Sign in with Google
-  </Button>
+  </button>
 </div>
 
 <style lang="scss">
