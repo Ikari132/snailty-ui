@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { goto } from "@roxi/routify";
   import { writable } from "svelte/store";
   import { _ } from "svelte-i18n";
-  import Button from "./../../../components/Button.svelte";
+  // import Button from "./../../../components/Button.svelte";
   import Water from "./../../../components/Water.svelte";
   import { CATEGORIES_BREW_TIME } from "../../constants";
   import { onMount } from "svelte";
@@ -21,16 +22,30 @@
     }
   });
 
-  let counter = writable(0);
+  const brewCount = parseInt(localStorage.getItem("brew_count"));
+
+  let counter = writable(brewCount || 0);
   let fill = false;
 
   function startFill() {
+    console.log("here");
     counter.update((v) => v + 1);
     fill = true;
   }
+
+  function endTimer() {
+    localStorage.removeItem("brew_count");
+    counter.update(() => 0);
+    $goto("/");
+  }
+
   function resetButton() {
     console.log("on drain end");
     fill = false;
+  }
+  $: {
+    console.log($counter, "coutn");
+    localStorage.setItem("brew_count", `${$counter}`);
   }
 </script>
 
@@ -58,9 +73,19 @@
         {/if}
       </p>
 
-      <Button on:click={startFill} disabled={fill}>
+      <button class="btn btn-primary" on:click={startFill} disabled={fill}>
         {fill ? $_("wait") : $_("start")}
-      </Button>
+      </button>
+
+      {#if $counter >= 1}
+        <br />
+        <button class="btn btn-secondary" on:click={endTimer} disabled={fill}>
+          End
+        </button>
+      {/if}
+      <!-- <Button on:click={startFill} disabled={fill}>
+        {fill ? $_("wait") : $_("start")}
+      </Button> -->
     </div>
   </div>
 </div>
