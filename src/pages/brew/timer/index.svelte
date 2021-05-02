@@ -27,8 +27,19 @@
   let counter = writable(brewCount || 0);
   let fill = false;
 
+  let bellSound;
+  // let audio;
+  onMount(() => {
+    bellSound = document.createElement("audio");
+    bellSound.src = "bell.wav";
+
+    // audio = new Audio("bell.wav");
+  });
+
   function startFill() {
     console.log("here");
+    bellSound.play();
+    // audio.play();
     counter.update((v) => v + 1);
     fill = true;
   }
@@ -39,9 +50,19 @@
     $goto("/");
   }
 
+  const vibrate = window?.navigator?.vibrate;
+
   function resetButton() {
     console.log("on drain end");
     fill = false;
+
+    console.log("bell", bellSound);
+    if (bellSound?.play) {
+      bellSound.play();
+    }
+    if (vibrate) {
+      vibrate([100, 20, 100, 20, 100, 20]);
+    }
   }
   $: {
     console.log($counter, "coutn");
