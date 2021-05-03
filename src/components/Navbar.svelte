@@ -62,7 +62,7 @@
   .main-toolbar {
     width: 100%;
     height: var(--navbar-height);
-    max-height: 60px;
+    max-height: var(--navbar-height);
     position: fixed;
     bottom: 0;
     left: 0;
