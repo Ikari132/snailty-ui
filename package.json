@@ -72,6 +72,7 @@
       ]
    },
    "dependencies": {
+      "bootstrap": "^4.6.0",
       "svelte-i18n": "^3.3.5",
       "svelte-icons": "^2.1.0",
       "sveltestrap": "^3.13.0",
