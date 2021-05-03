@@ -27,12 +27,17 @@
   let counter = writable(brewCount || 0);
   let fill = false;
 
-  let bellSound;
-  onMount(() => {
-    bellSound = new Audio("/bell.wav");
-  });
+  let bellSound = new Audio();
+
+  // onMount(() => {
+  //   bellSound = new Audio("/bell.wav");
+  // });
 
   function startFill() {
+    if ($counter === 0) {
+      bellSound.muted = false;
+      bellSound.play();
+    }
     counter.update((v) => v + 1);
     fill = true;
   }
@@ -45,6 +50,7 @@
 
   function handleBrewingEnd() {
     if (bellSound?.play) {
+      bellSound.src = "/bell.wav";
       bellSound.play();
     }
 
