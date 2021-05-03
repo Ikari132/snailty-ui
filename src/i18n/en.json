@@ -2,5 +2,8 @@
     "click_me": "Click me",
     "fill": "fill",
     "number": "number",
-    "choose_glass": "Choose glass"
+    "choose_glass": "Choose glass",
+    "start_brew": "Start brew",
+    "wait_brew": "Wait...",
+    "finish_brew": "Finish"
 }

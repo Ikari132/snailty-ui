@@ -146,7 +146,7 @@
       <path
         id="base-timer-path-remaining"
         stroke-dasharray={circleDasharray}
-        class="base-timer__path-remaining ${remainingPathColor}"
+        class="base-timer__path-remaining {remainingPathColor}"
         d="
             M 50, 50
             m -45, 0
@@ -162,6 +162,7 @@
 </div>
 
 <style lang="scss">
+  $elapsedColor: rgba(255, 255, 255, 0.4);
   .base-timer {
     position: relative;
     width: 100%;
@@ -181,8 +182,8 @@
   .base-timer__path-elapsed {
     stroke-width: 7px;
     /* stroke: grey; */
-
-    stroke: rgba(65, 184, 131, 0.1);
+    stroke: $elapsedColor;
+    // stroke: rgba(65, 184, 131, 0.1);
   }
 
   .base-timer__path-remaining {
@@ -194,7 +195,8 @@
     fill-rule: nonzero;
     stroke: currentColor;
 
-    color: rgba(65, 184, 131, 0.5);
+    color: $elapsedColor;
+    // color: rgba(65, 184, 131, 0.5);
     backdrop-filter: blur(10px);
   }
 
@@ -226,7 +228,8 @@
       opacity: 0;
     }
     .base-timer__path-remaining {
-      color: rgba(65, 184, 131, 0.1);
+      color: $elapsedColor;
+      // color: rgba(65, 184, 131, 0.1);
     }
   }
 </style>

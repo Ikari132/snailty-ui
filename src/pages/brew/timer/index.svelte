@@ -3,7 +3,7 @@
   import { writable } from "svelte/store";
   import { _ } from "svelte-i18n";
   // import Button from "./../../../components/Button.svelte";
-  import Water from "./../../../components/Water.svelte";
+  import BrewingTimer from "../../../components/BrewingTimer.svelte";
   import { CATEGORIES_BREW_TIME } from "../../constants";
   import { onMount } from "svelte";
   import type { ITeaType } from "../../types";
@@ -28,18 +28,11 @@
   let fill = false;
 
   let bellSound;
-  // let audio;
   onMount(() => {
-    bellSound = document.createElement("audio");
-    bellSound.src = "bell.wav";
-
-    // audio = new Audio("bell.wav");
+    bellSound = new Audio("/bell.wav");
   });
 
   function startFill() {
-    console.log("here");
-    bellSound.play();
-    // audio.play();
     counter.update((v) => v + 1);
     fill = true;
   }
@@ -50,22 +43,21 @@
     $goto("/");
   }
 
-  const vibrate = window?.navigator?.vibrate;
-
-  function resetButton() {
-    console.log("on drain end");
-    fill = false;
-
-    console.log("bell", bellSound);
+  function handleBrewingEnd() {
     if (bellSound?.play) {
       bellSound.play();
     }
-    if (vibrate) {
-      vibrate([100, 20, 100, 20, 100, 20]);
+
+    if (window?.navigator?.vibrate) {
+      window.navigator.vibrate([100, 20, 100, 20, 100, 20]);
     }
   }
+
+  function handleDrainEnd() {
+    fill = false;
+  }
+
   $: {
-    console.log($counter, "coutn");
     localStorage.setItem("brew_count", `${$counter}`);
   }
 </script>
@@ -75,9 +67,10 @@
     <div class="flex flex-col">
       <!-- <h1 class="mb-8 ps-4 flex justify-center">Brewing counter</h1> -->
 
-      <Water
+      <BrewingTimer
         filling={fill}
-        on:drain={resetButton}
+        on:drainend={handleDrainEnd}
+        on:brewingend={handleBrewingEnd}
         fillCount={$counter}
         {brewingTime}
         {teaType}
@@ -95,14 +88,14 @@
       </p>
 
       <button class="btn btn-primary" on:click={startFill} disabled={fill}>
-        {fill ? $_("wait") : $_("start")}
+        {fill ? $_("wait_brew") : $_("start_brew")}
       </button>
 
       {#if $counter >= 1}
         <br />
-        <button class="btn btn-secondary" on:click={endTimer} disabled={fill}>
-          End
-        </button>
+        <button class="btn btn-secondary" on:click={endTimer}
+          >{$_("finish_brew")}</button
+        >
       {/if}
       <!-- <Button on:click={startFill} disabled={fill}>
         {fill ? $_("wait") : $_("start")}
